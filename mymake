@@ -1,0 +1,5 @@
+#!/bin/bash
+
+PROGRAM=`basename $1 .cpp`
+
+/home/petar/install/gcc-7.1.0/bin/g++ $PROGRAM.cpp -o $PROGRAM -Wl,-rpath -Wl,/home/petar/install/gcc-7.1.0/lib64 -std=c++1z -ggdb -O0
