@@ -1,5 +1,17 @@
 #!/bin/bash
 
+STD_LIB=/home/petar/install/gcc-7.1.0/lib64
+BOOST=/home/petar/install/boost-1.64.0
+BOOST_LIB=$BOOST/lib
+BOOST_INC=$BOOST/include
+ALL_BOOST_LIBS=$(ls /home/petar/install/boost-1.64.0/lib | grep '\.so$' | sed 's/lib/-l/' | sed 's/\.so//')
+
 PROGRAM=`basename $1 .cpp`
 
-/home/petar/install/gcc-7.1.0/bin/g++ $PROGRAM.cpp -o $PROGRAM -Wl,-rpath -Wl,/home/petar/install/gcc-7.1.0/lib64 -std=c++1z -ggdb -O0
+/home/petar/install/gcc-7.1.0/bin/g++ $PROGRAM.cpp -o $PROGRAM  \
+    -L$BOOST_LIB                                                \
+    -Wl,-rpath,$STD_LIB,-rpath,$BOOST_LIB                       \
+    -I$BOOST_INC                                                \
+    $ALL_BOOST_LIBS                                             \
+    -lpython2.7                                                 \
+    -std=c++1z -ggdb -O0
