@@ -1,3 +1,8 @@
+https://gcc.gnu.org/install/build.html
+
+mkdir objdir
 ../gcc-7.1.0/configure --prefix=/home/petar/install/gcc-7.1.0/ --enable-languages=c,c++ --disable-bootstrap --disable-multilib
+make -j4
+make install
 
 use the `-Wl,-rpath -Wl,LIBDIR' linker flag
